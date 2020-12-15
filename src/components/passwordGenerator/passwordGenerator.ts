@@ -1,4 +1,5 @@
-import charSets from "../charSet";
+import charSets from "../consts/charSet";
+import {encryptSave} from "../saveAndEncrypt"
 
   export class PasswordGenerator {
     passwordLength: number;
@@ -26,8 +27,10 @@ import charSets from "../charSet";
         for (var j = 0 ; j < this.passwordLength; j++) {
           currentPassword += (String(this.getTurnsForChar()));
         }
-        passwordValue.push(currentPassword)
-        var write =  window.localStorage.setItem(currentPassword, currentPassword);
+        passwordValue.push(currentPassword);
+        //new function in order to write already generated passwords into localstorage and check if one already is inside
+        var save =  new encryptSave();
+        save.save(currentPassword);
   
       }
       console.log(passwordValue)
