@@ -1,6 +1,6 @@
 import './App.css';
 import React from "react";
-import {TextField, Button, Slider} from '@material-ui/core';
+import { TextField, Button, Slider } from '@material-ui/core';
 import { PasswordGenerator } from "./components/passwordGenerator/passwordGenerator";
 import {CsvDataService} from './components/csvDownloader'
 
@@ -75,13 +75,17 @@ export default class App extends React.Component {
         <div className="GeneralContainer">
           <h1>Secure Password Generation</h1>
           <br></br>
+        </div>
+        <div> 
           <form className="FormTest" noValidate autoComplete="off">
           <TextField id="outlined-basic" variant="outlined" value = {this.state.password} />
           <br></br>
           </form>
-          <Button className="CopyToClipBoard" onClick={() => {navigator.clipboard.writeText(this.state.password)}} variant="contained"> Text</Button>
+          <Button className="CopyToClipBoard" onClick={() => {navigator.clipboard.writeText(this.state.password)}} variant="contained"> Copy to Clipboard</Button>
           <Button className="PasswordGenerateButton" onClick={() => { this.passwordGeneration()} } variant="contained" >Generate New Passowrd</Button>
-          <Button className="test" onClick={this.savePasswordToCSV}  variant="contained">Button</Button>
+        </div>
+        <div>  
+          <Button className="test" onClick={this.savePasswordToCSV}  variant="contained">Save your Passwords to</Button>
           <br></br>
           <Slider 
               className = "sliderPasswordLength"
@@ -93,6 +97,8 @@ export default class App extends React.Component {
               valueLabelDisplay="on"
           />       
           <br></br>
+        </div>
+        <div>
           <Slider
               className = "sliderPasswordAmount"
               value = {this.state.options.amount}
@@ -103,14 +109,15 @@ export default class App extends React.Component {
               valueLabelDisplay="on"
           />
           <div>
-            <input type="radio" value={!this.state.options.special} name="special" onChange= {this.handleChange} /> Use Special Chars
-            <input type="radio" value={true} name="upper" onClick= {this.handleChange} /> Use UpperCase Chars
-            <input type="radio" value={true} name="lower" onClick= {this.handleChange}/> lower
-            <input type="radio" value={true} name="digits" onClick = {this.handleChange} /> digits
+            <input type="radio" value={true} name="special" onChange= {this.handleChange} checked={this.state.options.special} /> Use Special Chars
+            <input type="radio" value={true} name="upper" onClick= {this.handleChange} checked={this.state.options.upper}/> Use UpperCase Chars
+            <input type="radio" value={true} name="lower" onClick= {this.handleChange} checked={this.state.options.lower}/> lower
+            <input type="radio" value={true} name="digits" onClick = {this.handleChange} checked={this.state.options.digits}/> digits
         </div>
         </div>
       </div>
     );
+    
   }
   
 
