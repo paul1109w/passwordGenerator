@@ -20,16 +20,22 @@ import {encryptSave} from "../saveAndEncrypt"
 
     
     
-    generatePassword = () => {
+    protected generatePassword = ():string[] => {
       let passwordValue = [];
       for(var i = 0 ; i < this.amount; i++) {
         let currentPassword = ''
         for (var j = 0 ; j < this.passwordLength; j++) {
           currentPassword += (String(this.getTurnsForChar()));
         }
-        passwordValue.push(currentPassword);
-        //new function in order to write already generated passwords into localstorage and check if one already is inside
+        
         var save =  new encryptSave();
+        if(save.checkIfPasswordAlreadyInside(currentPassword)) {
+          currentPassword = '';
+          for (var f = 0 ; f < this.passwordLength; f++) {
+            currentPassword += (String(this.getTurnsForChar()));
+          }
+        }
+        passwordValue.push(currentPassword);
         save.save(currentPassword);
   
       }
@@ -37,12 +43,12 @@ import {encryptSave} from "../saveAndEncrypt"
       return passwordValue;
     }
 
-    getRandomValueFromChars = (charSetToUse: string[]) => {
+    private getRandomValueFromChars = (charSetToUse: string[]):string => {
       const radomValue = Math.ceil(Math.random() * charSetToUse.length -1);
       return charSetToUse[radomValue]
     }
 
-    getTurnsForChar = ():string => {
+    private getTurnsForChar = ():string => {
       const randomValue = Math.floor(Math.random() * 4);
       switch (randomValue) {
         case 0: 

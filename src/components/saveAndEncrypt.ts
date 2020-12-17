@@ -8,6 +8,11 @@ export class encryptSave {
     }
 
     save = (data:string) => {
-        window.localStorage.setItem(String(this.encrypt(data)), String(this.encrypt(data)));
+        window.localStorage.setItem(String(this.encrypt(data)), "1");
+    }
+
+    checkIfPasswordAlreadyInside = (data:string) => {
+        const hash = String(this.encrypt(data));
+        return window.localStorage.getItem(hash) === null ? false : true;
     }
 }

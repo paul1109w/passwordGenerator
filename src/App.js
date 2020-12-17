@@ -2,7 +2,7 @@ import './App.css';
 import React from "react";
 import { TextField, Button, Slider } from '@material-ui/core';
 import { PasswordGenerator } from "./components/passwordGenerator/passwordGenerator";
-import {CsvDataService} from './components/csvDownloader'
+import { CsvDataService } from './components/csvDownloader'
 
 export default class App extends React.Component {
   state = {
@@ -32,6 +32,7 @@ export default class App extends React.Component {
     const options = {
       ...this.state.options
     };
+    console.log(value);
     if(value) {
       options.[name] = true;
     } else {
@@ -110,15 +111,14 @@ export default class App extends React.Component {
           />
           <div>
             <input type="radio" value={true} name="special" onChange= {this.handleChange} checked={this.state.options.special} /> Use Special Chars
-            <input type="radio" value={true} name="upper" onClick= {this.handleChange} checked={this.state.options.upper}/> Use UpperCase Chars
-            <input type="radio" value={true} name="lower" onClick= {this.handleChange} checked={this.state.options.lower}/> lower
-            <input type="radio" value={true} name="digits" onClick = {this.handleChange} checked={this.state.options.digits}/> digits
+            <input type="radio" value={true} name="upper" onChange= {this.handleChange} checked={this.state.options.upper}/> Use UpperCase Chars
+            <input type="radio" value={true} name="lower" onChange= {this.handleChange} checked={this.state.options.lower}/> lower
+            <input type="radio" value={true} name="digits" onChange = {this.handleChange} checked={this.state.options.digits}/> digits
         </div>
         </div>
       </div>
     );
     
   }
-  
 
 }
