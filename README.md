@@ -18,8 +18,7 @@ You will also see any lint errors in the console.
 
 ### Needed files
 
-In order to use the saveAndEncrypt class you will have to add the constSecret file here /src/components/consts in order for it to work.
-You should also use the included setupDB.sql file in order to create the database needed for the API.
+You should use the included setupDB.sql file in order to create the database needed for the API.
 In addition you will need to add this to a server/data/config.js file which should look like the example given below.
 
 ```javascript
