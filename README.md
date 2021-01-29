@@ -22,17 +22,17 @@ You should use the included setupDB.sql file in order to create the database nee
 In addition you will need to add this to a server/data/config.js file which should look like the example given below.
 
 ```javascript
-const mysql = require('mysql');
+const mysql = require("mysql");
 
 // Set database connection credentials
 const config = {
-    host: '127.0.0.1',
-    user: 'your user',
-    password: 'password',
-    database: 'passwordGenerator',
+  host: "127.0.0.1",
+  user: "your user",
+  password: "password",
+  database: "passwordGenerator",
 };
 
 const db = mysql.createPool(config);
 
-module.exports = db
+module.exports = db;
 ```
