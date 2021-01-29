@@ -97,7 +97,7 @@ body {
 #buttonSaveCSV {
   position: absolute;
   padding: 0.4%;
-  left: 81%;
+  right: 4%;
   min-height: 0.1%;
   min-width: 15%;
 }
