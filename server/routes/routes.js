@@ -38,7 +38,7 @@ const router = (app) => {
   // Adds a new password
   app.post("/passwords", (request, response) => {
     db.query(
-      'Insert into savePasswords (passwordHASH) values("?");',
+      "Insert into savePasswords (passwordHASH) values(?);",
       request.body.passwordHASH,
       (error, result) => {
         if (error) {
