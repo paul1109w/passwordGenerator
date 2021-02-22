@@ -9,6 +9,7 @@ export class PasswordGenerator {
   useSpecialChars: boolean;
   usedigits: boolean;
   amount: number;
+  encryptString: string;
 
   constructor(
     length: number,
@@ -16,7 +17,8 @@ export class PasswordGenerator {
     lower: boolean,
     special: boolean,
     nums: boolean,
-    amount: number
+    amount: number,
+    passwordEncryptString: string
   ) {
     this.passwordLength = length;
     this.useLowerCase = lower;
@@ -24,6 +26,7 @@ export class PasswordGenerator {
     this.useSpecialChars = special;
     this.usedigits = nums;
     this.amount = amount;
+    this.encryptString = passwordEncryptString;
   }
 
   protected generatePassword = async (): Promise<string[]> => {
@@ -33,7 +36,7 @@ export class PasswordGenerator {
     //loop to generate the amount of passwords needed
     for (var i = 0; i < this.amount; i++) {
       // generate password with the length in passwordLength
-      var save = new encryptSave();
+      var save = new encryptSave(this.encryptString);
       var currentPassword = await this.genPasswordValue(
         this.passwordLength,
         save

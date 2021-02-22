@@ -1,13 +1,15 @@
 import CryptoES from "crypto-es";
-import { secret } from "./consts/constSecret";
 import axios from "axios";
 
 export class encryptSave {
+  encryptString: string;
+
+  constructor(passwordEncryptString: string) {
+    this.encryptString = passwordEncryptString;
+  }
   //encrypt the generated password using the secret in the constSecret file + the crypt-es package
   private encrypt = (data: string) => {
-    const hash = CryptoES.HmacSHA512(data, secret);
-    console.log(String(CryptoES.HmacSHA512("test", secret)));
-    console.log(String(CryptoES.HmacSHA512("test", secret)));
+    const hash = CryptoES.HmacSHA512(data, this.encryptString);
     return hash;
   };
 

@@ -6,8 +6,6 @@ class Popup extends React.Component {
     passwordSecretString: String,
   };
 
-  test = this.state.passwordSecretString;
-
   onTodoChange(value) {
     this.setState({
       passwordSecretString: value,
