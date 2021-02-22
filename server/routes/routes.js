@@ -45,7 +45,7 @@ const router = (app) => {
           console.log(request.body);
         }
 
-        response.status(201).send(`User added with ID: ${result.insertID}`);
+        response.status(201).send(`Password added with ID: ${result.insertID}`);
       }
     );
   });
