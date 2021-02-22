@@ -1,5 +1,6 @@
-import CryptoES from "crypto-es";
 import axios from "axios";
+
+const crypto = require("crypto");
 
 export class encryptSave {
   encryptString: string;
@@ -9,8 +10,11 @@ export class encryptSave {
   }
   //encrypt the generated password using the secret in the constSecret file + the crypt-es package
   private encrypt = (data: string) => {
-    const hash = CryptoES.HmacSHA512(data, this.encryptString);
-    return hash;
+    // crypto-es was to slow here using aes for encryption
+    var mykey = crypto.createCipher("aes-256-cbc", this.encryptString);
+    var encryptedPassword = mykey.update(data, "utf8", "hex");
+    encryptedPassword += mykey.final("hex");
+    return encryptedPassword;
   };
 
   // save the encryted password string to the MySQL DB
@@ -19,6 +23,7 @@ export class encryptSave {
     const json = {
       passwordHASH: String(hash),
     };
+
     await axios.post("http://localhost:3002/passwords", json);
   };
 
