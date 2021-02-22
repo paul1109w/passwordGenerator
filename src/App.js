@@ -11,6 +11,7 @@ import {
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import { PasswordGenerator } from "./components/passwordGenerator/passwordGenerator";
 import { CsvDataService } from "./components/csvDownloader";
+import PopUp from "./components/popup/popup";
 
 export default class App extends React.Component {
   state = {
@@ -23,6 +24,12 @@ export default class App extends React.Component {
       amount: 1,
     },
     password: "",
+    showPopup: true,
+    passwordEncrypt: "",
+  };
+
+  callbackFunction = (childData) => {
+    this.setState({ passwordEncrypt: childData });
   };
 
   // copy currently generated passwords to user clipboard
@@ -41,6 +48,7 @@ export default class App extends React.Component {
 
   // handler to update the state values depending on which radio input was changed
   handleOptionsBoolChange = (e) => {
+    console.log(this.state.passwordEncrypt);
     const { name } = e.target;
     const options = {
       ...this.state.options,
@@ -93,7 +101,24 @@ export default class App extends React.Component {
     this.setState({ password: passwords });
   };
 
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup,
+    });
+  }
+
   render() {
+    let popUp = null;
+    if (this.state.showPopup) {
+      popUp = (
+        <PopUp
+          text='Click "Close Button" to hide popup'
+          closePopup={this.togglePopup.bind(this)}
+          parentCallback={this.callbackFunction}
+        />
+      );
+      return popUp;
+    }
     return (
       <div className="PasswordGeneratorApp">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -163,7 +188,7 @@ export default class App extends React.Component {
             style={{ maxWidth: "95%" }}
             className="sliderPasswordLength"
             value={this.state.options.length}
-            min={1}
+            min={8}
             max={128}
             step={2}
             onChange={(e, val) => this.handlerUpdateLength(val)}
