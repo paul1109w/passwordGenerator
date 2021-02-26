@@ -10,7 +10,7 @@ export class encryptSave {
   }
   //encrypt the generated password using the secret in the constSecret file + the crypt-es package
   private encrypt = (data: string) => {
-    // crypto-es was to slow here using aes for encryption
+    // crypto-es was to slow here, when using aes for encryption
     var mykey = crypto.createCipher("aes-256-cbc", this.encryptString);
     var encryptedPassword = mykey.update(data, "utf8", "hex");
     encryptedPassword += mykey.final("hex");
