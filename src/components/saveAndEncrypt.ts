@@ -1,17 +1,12 @@
 import axios from "axios";
-
+import { secret } from "./consts/constSecret";
 const crypto = require("crypto");
 
 export class encryptSave {
-  encryptString: string;
-
-  constructor(passwordEncryptString: string) {
-    this.encryptString = passwordEncryptString;
-  }
   //encrypt the generated password using the secret in the constSecret file + the crypt-es package
   private encrypt = (data: string) => {
     // crypto-es was to slow here, when using aes for encryption
-    var mykey = crypto.createCipher("aes-256-cbc", this.encryptString);
+    var mykey = crypto.createCipher("aes-256-cbc", secret);
     var encryptedPassword = mykey.update(data, "utf8", "hex");
     encryptedPassword += mykey.final("hex");
     return encryptedPassword;
