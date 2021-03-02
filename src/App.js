@@ -27,11 +27,6 @@ export default class App extends React.Component {
     showPopup: true,
   };
 
-  callbackFunction = (childData) => {
-    console.log(childData);
-    this.setState({ passwordEncrypt: childData });
-  };
-
   // copy currently generated passwords to user clipboard
   copyPasswordToClipBoard = () => {
     navigator.clipboard.writeText(this.state.password);
@@ -109,13 +104,7 @@ export default class App extends React.Component {
   render() {
     let popUp = null;
     if (this.state.showPopup) {
-      popUp = (
-        <PopUp
-          text='Click "Close Button" to hide popup'
-          closePopup={this.togglePopup.bind(this)}
-          parentCallback={this.callbackFunction}
-        />
-      );
+      popUp = <PopUp closePopup={this.togglePopup.bind(this)} />;
       return popUp;
     }
     return (
