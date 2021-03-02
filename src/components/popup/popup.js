@@ -1,10 +1,9 @@
 import React from "react";
 import "./style.css";
-import secret from "./../consts/constSecret";
+import { secret } from "./../consts/constSecret";
 
 class Popup extends React.Component {
   state = {
-    passwordSecretString: String,
     messageString: "Please enter the string to encrypt your passwords with",
   };
 
@@ -13,16 +12,9 @@ class Popup extends React.Component {
       passwordSecretString: value,
     });
   }
-  sendData = () => {
-    this.props.parentCallback(this.state.passwordSecretString);
-  };
 
   validateInput = () => {
     if (this.state.passwordSecretString === secret) {
-      this.sendData();
-      this.setState({
-        showExit: true,
-      });
       this.props.closePopup();
     } else {
       this.setState({
