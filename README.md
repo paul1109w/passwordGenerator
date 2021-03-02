@@ -36,3 +36,11 @@ const db = mysql.createPool(config);
 
 module.exports = db;
 ```
+
+### New function to show decrypted passwords
+
+Just open the `localhost:3002/passworddecrypt/yoursecretpassword` where yoursecretpassword also equals the string you
+use in your data/secret to few the saved passwords in their original decrypted state at least for the ones where this key
+was also used to encrypt the passwords.
+
+The default value for that would be `secret`
