@@ -1,8 +1,20 @@
+const secret = require("../data/secret");
 const db = require("../data/config");
+
+var crypto = require("crypto"),
+  algorithm = "aes-256-ctr",
+  password = secret;
 
 // Route the app
 const router = (app) => {
   // Display welcome message on the root
+
+  function decrypt(text) {
+    var decipher = crypto.createDecipher(algorithm, password);
+    var dec = decipher.update(text, "hex", "utf8");
+    dec += decipher.final("utf8");
+    return dec;
+  }
 
   app.get("/", (request, response) => {
     response.send({
@@ -10,7 +22,23 @@ const router = (app) => {
     });
   });
 
-  // returns all passwords
+  // returns all passwords decrypted for now as an ugly solution
+  app.get("/passworddecrypt/:decryptkey", (request, response) => {
+    const decryptkey = request.params.decryptkey;
+    if (decryptkey === secret) {
+      db.query("SELECT * FROM savePasswords", (error, result) => {
+        if (error) throw error;
+        var passwords = [];
+        result.forEach((element) => {
+          var decrypted = decrypt(element.passwordHASH);
+          passwords.push(decrypted);
+        });
+
+        response.send(passwords);
+      });
+    }
+  });
+
   app.get("/passwords", (request, response) => {
     db.query("SELECT * FROM savePasswords", (error, result) => {
       if (error) throw error;
