@@ -1,5 +1,7 @@
 # This Project is still Work in Progress and subject to changes. Mainly concerning the UI and documentation
 
+## If you've previously cloned this project please visit the setupDB file again and execute it again
+
 ## Available Scripts
 
 In the project directory, you can run:
