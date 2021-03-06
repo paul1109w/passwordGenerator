@@ -28,13 +28,16 @@ const router = (app) => {
     if (decryptkey === secret) {
       db.query("CALL getAllPasswords()", (error, result) => {
         if (error) throw error;
-        var passwords = [];
+        var decrypted = {};
+        decrypted.passwords = [];
         result[0].forEach((element) => {
-          var decrypted = decrypt(element.passwordHASH);
-          passwords.push(decrypted);
+          var decryptedPassword = decrypt(element.passwordHASH);
+          decrypted.passwords.push({
+            id: element.passwordID,
+            password: decryptedPassword,
+          });
         });
-
-        response.send(passwords);
+        response.send(decrypted);
       });
     }
   });
