@@ -26,10 +26,10 @@ const router = (app) => {
   app.get("/passworddecrypt/:decryptkey", (request, response) => {
     const decryptkey = request.params.decryptkey;
     if (decryptkey === secret) {
-      db.query("SELECT * FROM savePasswords", (error, result) => {
+      db.query("CALL getAllPasswords()", (error, result) => {
         if (error) throw error;
         var passwords = [];
-        result.forEach((element) => {
+        result[0].forEach((element) => {
           var decrypted = decrypt(element.passwordHASH);
           passwords.push(decrypted);
         });
@@ -40,33 +40,29 @@ const router = (app) => {
   });
 
   app.get("/passwords", (request, response) => {
-    db.query("SELECT * FROM savePasswords", (error, result) => {
+    db.query("CALL getAllPasswords()", (error, result) => {
       if (error) throw error;
 
-      response.send(result);
+      response.send(result[0]);
     });
   });
 
   // returns if specific password hash is already in the DB
   app.get("/passwords/:hash", (request, response) => {
     const hash = request.params.hash;
-    db.query(
-      "SELECT * FROM savePasswords WHERE passwordHASH = ?;",
-      hash,
-      (error, result) => {
-        if (error) {
-          throw error;
-        }
-        var valueInDB = Object.values(result).length > 0;
-        response.send(valueInDB);
+    db.query("CALL getOnePassword(?)", hash, (error, result) => {
+      if (error) {
+        throw error;
       }
-    );
+      var valueInDB = Object.values(result[0]).length > 0;
+      response.send(valueInDB);
+    });
   });
 
   // Adds a new password
   app.post("/passwords", (request, response) => {
     db.query(
-      "Insert into savePasswords (passwordHASH) values(?);",
+      "CALL insertNewPassword(?)",
       request.body.passwordHASH,
       (error, result) => {
         if (error) {
