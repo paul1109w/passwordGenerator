@@ -7,7 +7,7 @@
   right: 0;
   bottom: 0;
   margin: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: black;
 }
 .popup_inner {
   position: absolute;
@@ -17,6 +17,11 @@
   bottom: 25%;
   margin: auto;
   border-radius: 20px;
-  background: #121212;
-  color: #fafafa;
+  color: black;
+  background-color: lightgrey;
+}
+
+.label {
+  position: relative;
+  font-size: large;
 }
