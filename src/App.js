@@ -49,7 +49,6 @@ export default class App extends React.Component {
     };
     // set the Option with the name of the CheckBox equal to the checked Status
     options[name] = e.target.checked;
-    console.log(options);
     this.setState({ options });
   };
 
