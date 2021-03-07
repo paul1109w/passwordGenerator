@@ -216,7 +216,6 @@ export default class App extends React.Component {
             <Checkbox
               value={true}
               name="upper"
-              onChange={this.handleOptionsBoolChange}
               checked={this.state.options.upper}
               style={{ color: "red" }}
             />
@@ -224,7 +223,6 @@ export default class App extends React.Component {
             <Checkbox
               value={true}
               name="lower"
-              onChange={this.handleOptionsBoolChange}
               checked={this.state.options.lower}
               style={{ color: "red" }}
             />
